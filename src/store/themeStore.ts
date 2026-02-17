@@ -11,9 +11,9 @@ interface ThemeState {
 export const useThemeStore = create<ThemeState>()(
   persist(
     (set) => ({
-      theme: "light",
-      background: "#EB9C41",
-      text: "#000000",
+      theme: "dark",
+      background: "#4D179A",
+      text: "#fafafa",
       toggleTheme: () =>
         set((state) => ({
           theme: state.theme === "light" ? "dark" : "light",
