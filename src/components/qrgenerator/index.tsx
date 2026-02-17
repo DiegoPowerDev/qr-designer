@@ -111,7 +111,7 @@ export default function QrGenerator() {
 
   return (
     <div className="grid grid-cols-2 pt-8 w-3/4 justify-center gap-8">
-      <div className="flex justify-center items-start">
+      <div className="flex justify-center items-start ">
         {/* COLUMNA IZQUIERDA: CONFIGURACIÓN */}
 
         <Tabs defaultValue="url" onValueChange={setMode} className="w-full">
@@ -124,14 +124,14 @@ export default function QrGenerator() {
             </TabsTrigger>
           </TabsList>
 
-          <Card className="border-none shadow-xl bg-slate-900 text-white backdrop-blur-sm">
+          <Card className="border-none shadow-xl bg-slate-900 text-white backdrop-blur-sm h-full flex flex-col">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-2xl font-bold">
                 <Settings2 className="w-6 h-6 text-primary" />
                 Configuración
               </CardTitle>
             </CardHeader>
-            <CardContent className=" ">
+            <CardContent className="h-full flex flex-col ">
               <TabsContent value="url" className="flex flex-col gap-2 ">
                 <div className="flex flex-col gap-2 ">
                   <Label
@@ -212,11 +212,15 @@ export default function QrGenerator() {
               <div className="pt-4  ">
                 <div className="flex w-full  justify-center gap-4 items-center">
                   <div className="flex flex-col gap-2 ">
-                    <Label className="text-xs uppercase font-bold text-muted-foreground">
+                    <Label
+                      htmlFor="color1"
+                      className="text-xs uppercase font-bold  "
+                    >
                       Color QR
                     </Label>
                     <div className="flex items-center px-2 bg-white rounded justify-center">
                       <input
+                        id="color1"
                         type="color"
                         value={fgColor}
                         onChange={(e) => setFgColor(e.target.value)}
@@ -226,11 +230,15 @@ export default function QrGenerator() {
                     </div>
                   </div>
                   <div className="flex flex-col gap-2 ">
-                    <Label className="text-xs uppercase font-bold text-muted-foreground">
+                    <Label
+                      htmlFor="color2"
+                      className="text-xs uppercase font-bold "
+                    >
                       Fondo
                     </Label>
                     <div className="flex items-center px-2 gap-2 border rounded  bg-background">
                       <input
+                        id="color2"
                         type="color"
                         value={bgColor}
                         onChange={(e) => setBgColor(e.target.value)}
@@ -240,14 +248,17 @@ export default function QrGenerator() {
                     </div>
                   </div>
                   <div className="flex flex-col gap-2 ">
-                    <Label className="text-xs uppercase font-bold text-muted-foreground">
+                    <Label className="text-xs uppercase font-bold ">
                       Redundancia
                     </Label>
                     <Select
                       value={level}
                       onValueChange={(v: any) => setLevel(v)}
                     >
-                      <SelectTrigger className="h-9 rounded-xl w-full">
+                      <SelectTrigger
+                        aria-label="Redundancia"
+                        className="h-9 rounded-xl w-full"
+                      >
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent position="popper">
@@ -306,16 +317,17 @@ export default function QrGenerator() {
 
       {/* COLUMNA DERECHA: PREVIEW FIJO */}
 
-      <Card className="border-none shadow-2xl h-full bg-slate-900 text-white  ">
+      <Card className="border-none shadow-2xl h-full bg-slate-900 text-white flex-1 flex flex-col ">
         <CardHeader className="text-center">
           <CardTitle className="text-xl">Vista Previa</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col items-center space-y-8">
-          <div className="p-6 bg-white rounded-[2rem] shadow-2xl ring-8 ring-white/10">
+          <div className="   shadow-2xl  border-2 border-white">
             <QRCodeSVG
               id="qr-svg"
               value={qrValue || " "}
               size={260}
+              marginSize={1}
               fgColor={fgColor}
               bgColor={bgColor}
               level={level}
@@ -338,7 +350,7 @@ export default function QrGenerator() {
               className="w-full h-14 text-lg font-bold rounded-2xl bg-blue-600 hover:bg-blue-500"
               onClick={() => downloadQR("png")}
             >
-              <Download className="mr-2 w-5 h-5" /> Descargar PNG
+              <Download className="mr-2 w-5 h-5 text-black" /> Descargar PNG
             </Button>
             <div className="grid grid-cols-2 gap-3">
               <Button
