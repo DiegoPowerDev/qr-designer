@@ -61,7 +61,11 @@ export function LogoDnD({ onLogoChange, currentLogo }: LogoUploadProps) {
             }
           `}
         >
-          <input {...getInputProps()} />
+          <input
+            id="logo-upload-input"
+            aria-label="Subir logo para el código QR"
+            {...getInputProps()}
+          />
           <div className="p-4 bg-white rounded-full shadow-sm mb-4">
             <Upload
               className={`w-6 h-6 ${isDragActive ? "text-blue-500" : "text-gray-400"}`}
@@ -69,12 +73,10 @@ export function LogoDnD({ onLogoChange, currentLogo }: LogoUploadProps) {
           </div>
 
           <div className="space-y-1">
-            <p className="text-sm font-semibold text-gray-700">
-              {isDragActive ? "¡Suéltalo ahora!" : "Arrastra tu logo aquí"}
+            <p className="text-sm font-semibold  ">
+              {isDragActive ? "¡Suéltalo aqui!" : "Arrastra tu logo aquí"}
             </p>
-            <p className="text-xs text-gray-500">
-              PNG, JPG, WEBP o SVG (Máx. 2MB)
-            </p>
+            <p className="text-xs ">PNG, JPG, WEBP o SVG (Máx. 2MB)</p>
           </div>
 
           {error && (
@@ -102,6 +104,7 @@ export function LogoDnD({ onLogoChange, currentLogo }: LogoUploadProps) {
           </div>
 
           <Button
+            aria-label="Eliminar logo"
             variant="ghost"
             size="icon"
             onClick={() => onLogoChange(null)}
