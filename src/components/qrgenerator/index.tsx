@@ -56,7 +56,6 @@ export default function QrGenerator() {
   const [wifiEncryption, setWifiEncryption] = useState("WPA");
   const [showPass, setShowPass] = useState(false);
 
-  const theme = useThemeStore((s) => s.theme);
   const background = useThemeStore((s) => s.background);
   const text = useThemeStore((s) => s.text);
 
@@ -322,7 +321,7 @@ export default function QrGenerator() {
                     <Palette className="w-4 h-4" /> Personalización de Logo
                   </Label>
                   {!logo ? (
-                    <LogoDnD currentLogo={logo} onLogoChange={setLogo} />
+                    <LogoDnD onLogoChange={setLogo} />
                   ) : (
                     <div className="flex items-center gap-6 p-2 border rounded-xl bg-gray-50/10">
                       <div className="relative">
