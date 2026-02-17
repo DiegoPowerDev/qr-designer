@@ -114,7 +114,7 @@ export default function QrGenerator() {
   };
 
   return (
-    <div className="grid grid-cols-2 w-11/12 md:w-7/12 justify-center gap-8 h-full 2xl:h-3/4 2xl:py-6">
+    <div className=" grid grid-cols-1 md:grid-cols-2 w-11/12 md:w-7/12 justify-center gap-8 h-full 2xl:h-3/4 2xl:py-6">
       <div className="flex justify-center items-start">
         {/* COLUMNA IZQUIERDA: CONFIGURACIÓN */}
 
@@ -125,7 +125,7 @@ export default function QrGenerator() {
         >
           <TabsList
             style={{ background: background, color: text }}
-            className={`grid w-full grid-cols-2    rounded-xl  `}
+            className={`grid w-full  grid-cols-2    rounded-xl  `}
           >
             <TabsTrigger value="url" className="rounded-lg">
               <LinkIcon className="w-4 h-4 mr-2" /> URL

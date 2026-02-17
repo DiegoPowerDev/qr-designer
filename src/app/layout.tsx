@@ -35,7 +35,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen max-w-screen flex`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased md:h-screen max-w-screen flex`}
       >
         <TooltipProvider>{children}</TooltipProvider>
       </body>
