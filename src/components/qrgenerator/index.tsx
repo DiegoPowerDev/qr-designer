@@ -1,5 +1,9 @@
 "use client";
-
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useState, useEffect } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import {
@@ -12,6 +16,7 @@ import {
   EyeOff,
   Eye,
   Trash2,
+  Info,
 } from "lucide-react";
 
 // Shadcn UI
@@ -19,13 +24,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
+
 import {
   Select,
   SelectContent,
@@ -35,6 +34,7 @@ import {
 } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LogoDnD } from "./LogoDnD";
+import { useThemeStore } from "@/store/themeStore";
 
 export default function QrGenerator() {
   const [mode, setMode] = useState("url");
@@ -52,9 +52,13 @@ export default function QrGenerator() {
 
   // Estados WIFI
   const [wifiName, setWifiName] = useState("");
-  const [wifiPass, setWifiPass] = useState("");
+  const [wifiPass, setWifiPass] = useState("123");
   const [wifiEncryption, setWifiEncryption] = useState("WPA");
   const [showPass, setShowPass] = useState(false);
+
+  const theme = useThemeStore((s) => s.theme);
+  const background = useThemeStore((s) => s.background);
+  const text = useThemeStore((s) => s.text);
 
   // Lógica de generación del valor del QR
   useEffect(() => {
@@ -110,61 +114,78 @@ export default function QrGenerator() {
   };
 
   return (
-    <div className="grid grid-cols-2 pt-8 w-3/4 justify-center gap-8">
-      <div className="flex justify-center items-start ">
+    <div className="grid grid-cols-2 w-11/12 md:w-7/12 justify-center gap-8 h-full 2xl:h-3/4 2xl:py-6">
+      <div className="flex justify-center items-start">
         {/* COLUMNA IZQUIERDA: CONFIGURACIÓN */}
 
-        <Tabs defaultValue="url" onValueChange={setMode} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 h-12 bg-slate-900 text-white rounded-xl ">
+        <Tabs
+          defaultValue="url"
+          onValueChange={setMode}
+          className="w-full h-full"
+        >
+          <TabsList
+            style={{ background: background, color: text }}
+            className={`grid w-full grid-cols-2    rounded-xl  `}
+          >
             <TabsTrigger value="url" className="rounded-lg">
-              <LinkIcon className="w-4 h-4 mr-2" /> Enlace
+              <LinkIcon className="w-4 h-4 mr-2" /> URL
             </TabsTrigger>
             <TabsTrigger value="wifi" className="rounded-lg">
               <Wifi className="w-4 h-4 mr-2" /> Wi-Fi
             </TabsTrigger>
           </TabsList>
 
-          <Card className="border-none shadow-xl bg-slate-900 text-white backdrop-blur-sm h-full flex flex-col">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-2xl font-bold">
-                <Settings2 className="w-6 h-6 text-primary" />
-                Configuración
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="h-full flex flex-col ">
-              <TabsContent value="url" className="flex flex-col gap-2 ">
+          <div
+            style={{ background: background, color: text }}
+            className={`border-none shadow-xl text-white backdrop-blur-sm h-full flex flex-col gap-2 px-6 py-4 rounded-xl`}
+          >
+            <div className="flex items-center gap-2 text-2xl font-bold py-2">
+              <Settings2 className="w-6 h-6  " />
+              Configuración
+            </div>
+            <div className="h-full  flex flex-col justify-between">
+              <TabsContent
+                value="url"
+                className="flex flex-col justify-start border p-4 rounded-xl"
+              >
                 <div className="flex flex-col gap-2 ">
                   <Label
                     htmlFor="url"
                     className="font-bold flex items-center gap-2"
                   >
-                    <Globe className="w-4 h-4" /> Enlace de destino
+                    <Globe className="w-4 h-4" /> URL :
                   </Label>
                   <Input
                     id="url"
                     placeholder="https://tu-sitio.com"
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
-                    className="h-12 rounded-xl"
+                    className="h-12 rounded-xl bg-white text-black"
                   />
                 </div>
               </TabsContent>
 
-              <TabsContent value="wifi" className="flex flex-col gap-2">
-                <div className=" flex flex-col gap-2">
+              <TabsContent
+                value="wifi"
+                className="flex flex-col justify-start border p-4 rounded-xl"
+              >
+                <div className="flex flex-col gap-4">
                   <div className=" flex flex-col gap-2">
-                    <Label htmlFor="ssid" className="font-bold">
+                    <Label
+                      htmlFor="ssid"
+                      className="font-bold flex items-center gap-2"
+                    >
                       Nombre de la Red (SSID)
                     </Label>
                     <Input
                       id="ssid"
-                      placeholder="Ej: Starbucks_Guest"
+                      placeholder="Nombre de red WI-FI"
                       value={wifiName}
                       onChange={(e) => setWifiName(e.target.value)}
-                      className="h-9 rounded-xl"
+                      className="h-9 rounded-xl bg-white text-black"
                     />
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="flex flex-col md:flex-row w-full gap-2">
                     <div className="flex flex-col gap-2">
                       <Label className="font-bold">Seguridad</Label>
                       <Select
@@ -174,7 +195,7 @@ export default function QrGenerator() {
                         <SelectTrigger className="h-12 rounded-xl">
                           <SelectValue />
                         </SelectTrigger>
-                        <SelectContent>
+                        <SelectContent position="popper">
                           <SelectItem value="WPA">WPA/WPA2</SelectItem>
                           <SelectItem value="WEP">WEP</SelectItem>
                           <SelectItem value="none">Abierta</SelectItem>
@@ -182,18 +203,18 @@ export default function QrGenerator() {
                       </Select>
                     </div>
                     {wifiEncryption !== "none" && (
-                      <div className="space-y-2">
+                      <div className="flex flex-col gap-2">
                         <Label className="font-bold">Contraseña</Label>
                         <div className="relative">
                           <Input
                             type={showPass ? "text" : "password"}
                             value={wifiPass}
                             onChange={(e) => setWifiPass(e.target.value)}
-                            className="h-9 rounded-xl "
+                            className="h-9 rounded-xl bg-white text-black"
                           />
                           <button
                             onClick={() => setShowPass(!showPass)}
-                            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer"
+                            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-700 cursor-pointer"
                           >
                             {showPass ? (
                               <EyeOff size={16} />
@@ -209,48 +230,73 @@ export default function QrGenerator() {
               </TabsContent>
 
               {/* OPCIONES DE APARIENCIA (COMUNES) */}
-              <div className="pt-4  ">
-                <div className="flex w-full  justify-center gap-4 items-center">
-                  <div className="flex flex-col gap-2 ">
+              <div className="pt-2">
+                <div className="flex w-full p-4 border rounded-xl justify-center gap-4  ">
+                  <div className="flex flex-col items-center">
                     <Label
                       htmlFor="color1"
                       className="text-xs uppercase font-bold  "
                     >
                       Color QR
                     </Label>
-                    <div className="flex items-center px-2 bg-white rounded justify-center">
-                      <input
-                        id="color1"
-                        type="color"
-                        value={fgColor}
-                        onChange={(e) => setFgColor(e.target.value)}
-                        className="w-8 h-9 rounded-xl cursor-pointer border-none"
-                      />
-                      <span className="text-black">{fgColor}</span>
-                    </div>
+
+                    <input
+                      id="color1"
+                      type="color"
+                      value={fgColor}
+                      onChange={(e) => setFgColor(e.target.value)}
+                      className="w-16 h-16  cursor-pointer  "
+                    />
                   </div>
-                  <div className="flex flex-col gap-2 ">
+                  <div className="flex flex-col items-center">
                     <Label
                       htmlFor="color2"
                       className="text-xs uppercase font-bold "
                     >
                       Fondo
                     </Label>
-                    <div className="flex items-center px-2 gap-2 border rounded  bg-background">
-                      <input
-                        id="color2"
-                        type="color"
-                        value={bgColor}
-                        onChange={(e) => setBgColor(e.target.value)}
-                        className="w-8 h-9 rounded-xl cursor-pointer border-none"
-                      />
-                      <span className="text-black">{bgColor}</span>
-                    </div>
+
+                    <input
+                      id="color2"
+                      type="color"
+                      value={bgColor}
+                      onChange={(e) => setBgColor(e.target.value)}
+                      className="w-16 h-16 cursor-pointer  "
+                    />
                   </div>
-                  <div className="flex flex-col gap-2 ">
-                    <Label className="text-xs uppercase font-bold ">
-                      Redundancia
-                    </Label>
+                  <div className="flex flex-col items-center gap-2 ">
+                    <div className="flex gap-2">
+                      <Label className="text-xs uppercase font-bold ">
+                        Redundancia
+                      </Label>
+
+                      <Tooltip delayDuration={300}>
+                        <TooltipTrigger asChild>
+                          <Info className="w-3.5 h-3.5 text-muted-foreground cursor-help" />
+                        </TooltipTrigger>
+                        <TooltipContent className="max-w-[280px] p-4">
+                          <div className="space-y-2">
+                            <p className="font-bold text-sm">
+                              Capacidad de Recuperación
+                            </p>
+                            <p className="text-xs leading-relaxed">
+                              Permite que el QR sea legible incluso si está
+                              **dañado, sucio o cubierto por un logo**.
+                            </p>
+                            <ul className="text-xs list-disc pl-4 space-y-1">
+                              <li>
+                                <strong>Nivel H (Máximo):</strong> Recomendado
+                                si usas logos grandes.
+                              </li>
+                              <li>
+                                <strong>Nivel L (Bajo):</strong> Crea un QR más
+                                simple y limpio, pero muy sensible a daños.
+                              </li>
+                            </ul>
+                          </div>
+                        </TooltipContent>
+                      </Tooltip>
+                    </div>
                     <Select
                       value={level}
                       onValueChange={(v: any) => setLevel(v)}
@@ -271,19 +317,19 @@ export default function QrGenerator() {
                   </div>
                 </div>
 
-                <div className="space-y-4 pt-4">
+                <div className="flex flex-col gap-2 pt-2">
                   <Label className="text-sm font-bold flex items-center gap-2">
                     <Palette className="w-4 h-4" /> Personalización de Logo
                   </Label>
                   {!logo ? (
                     <LogoDnD currentLogo={logo} onLogoChange={setLogo} />
                   ) : (
-                    <div className="flex items-center gap-6 p-6 border rounded-2xl bg-gray-50/50">
+                    <div className="flex items-center gap-6 p-2 border rounded-xl bg-gray-50/10">
                       <div className="relative">
                         <img
                           src={logo}
                           alt="Logo"
-                          className="w-20 h-20 object-contain bg-white border rounded-xl p-1"
+                          className="h-20 w-20 object-contain bg-white border rounded-xl p-1"
                         />
                         <Button
                           variant="destructive"
@@ -310,23 +356,24 @@ export default function QrGenerator() {
                   )}
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </Tabs>
       </div>
 
       {/* COLUMNA DERECHA: PREVIEW FIJO */}
 
-      <Card className="border-none shadow-2xl h-full bg-slate-900 text-white flex-1 flex flex-col ">
-        <CardHeader className="text-center">
-          <CardTitle className="text-xl">Vista Previa</CardTitle>
-        </CardHeader>
-        <CardContent className="flex flex-col items-center space-y-8">
-          <div className="   shadow-2xl  border-2 border-white">
+      <div
+        style={{ background: background, color: text }}
+        className={`gap-2 shadow-2xl   text-white flex flex-col py-4 h-full rounded-xl `}
+      >
+        <div className="w-full h-full flex flex-col items-center gap-4 ">
+          <div className="text-xl font-bold text-center">Vista Previa</div>
+          <div className="w-full flex flex-col h-full items-center justify-center gap-8">
             <QRCodeSVG
               id="qr-svg"
               value={qrValue || " "}
-              size={260}
+              className="w-64 h-64 2xl:w-80 2xl:h-80 object-contain  p-4"
               marginSize={1}
               fgColor={fgColor}
               bgColor={bgColor}
@@ -342,35 +389,37 @@ export default function QrGenerator() {
                   : undefined
               }
             />
-          </div>
 
-          <div className="w-full grid grid-cols-1 gap-3">
-            <Button
-              size="lg"
-              className="w-full h-14 text-lg font-bold rounded-2xl bg-blue-600 hover:bg-blue-500"
-              onClick={() => downloadQR("png")}
-            >
-              <Download className="mr-2 w-5 h-5 text-black" /> Descargar PNG
-            </Button>
-            <div className="grid grid-cols-2 gap-3">
-              <Button
-                variant="secondary"
-                className="rounded-xl h-12"
-                onClick={() => downloadQR("svg")}
-              >
-                SVG
-              </Button>
-              <Button
-                variant="secondary"
-                className="rounded-xl h-12"
-                onClick={() => downloadQR("webp")}
-              >
-                WebP
-              </Button>
+            <div className="  w-full flex flex-col items-center gap-2">
+              <div className="w-3/4 flex flex-col gap-2">
+                <Button
+                  size="lg"
+                  className="w-full h-14 text-lg font-bold rounded-2xl bg-green-600 hover:bg-green-500"
+                  onClick={() => downloadQR("png")}
+                >
+                  <Download className="mr-2 w-5 h-5 " /> Descargar PNG
+                </Button>
+                <div className="grid grid-cols-2 gap-2">
+                  <Button
+                    variant="secondary"
+                    className="rounded-xl h-12"
+                    onClick={() => downloadQR("svg")}
+                  >
+                    SVG
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    className="rounded-xl h-12"
+                    onClick={() => downloadQR("webp")}
+                  >
+                    WebP
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }
