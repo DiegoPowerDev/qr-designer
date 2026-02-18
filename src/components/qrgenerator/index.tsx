@@ -127,10 +127,10 @@ export default function QrGenerator() {
             className={`grid w-full  grid-cols-2    rounded-xl  `}
           >
             <TabsTrigger value="url" className="rounded-lg">
-              <LinkIcon className="w-4 h-4 mr-2" /> URL
+              <LinkIcon className="w-4 h-4 mr-2 font-bold" /> URL
             </TabsTrigger>
             <TabsTrigger value="wifi" className="rounded-lg">
-              <Wifi className="w-4 h-4 mr-2" /> Wi-Fi
+              <Wifi className="w-4 h-4 mr-2 font-bold" /> Wi-Fi
             </TabsTrigger>
           </TabsList>
 
@@ -396,7 +396,7 @@ export default function QrGenerator() {
                   className="w-full h-14 text-lg font-bold rounded-2xl bg-green-600 hover:bg-green-500"
                   onClick={() => downloadQR("png")}
                 >
-                  <Download className="mr-2 w-5 h-5 " /> Descargar PNG
+                  <Download className="mr-2 w-5 h-5 font-bold" /> Descargar PNG
                 </Button>
                 <div className="grid grid-cols-2 gap-2">
                   <Button
