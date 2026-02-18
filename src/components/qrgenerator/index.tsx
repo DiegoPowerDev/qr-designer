@@ -393,7 +393,7 @@ export default function QrGenerator() {
               <div className="w-3/4 flex flex-col gap-2">
                 <Button
                   size="lg"
-                  className="w-full h-14 text-lg font-bold rounded-2xl bg-green-600 hover:bg-green-500"
+                  className="w-full h-14 text-lg font-bold rounded-2xl bg-green-700 hover:bg-green-800"
                   onClick={() => downloadQR("png")}
                 >
                   <Download className="mr-2 w-5 h-5 font-bold" /> Descargar PNG
