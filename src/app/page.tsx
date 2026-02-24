@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const theme = useThemeStore((s) => s.theme);
@@ -19,12 +19,24 @@ export default function Home() {
   const background = useThemeStore((s) => s.background);
   const text = useThemeStore((s) => s.text);
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted)
+    return (
+      <div className="h-screen w-screen bg-black flex items-center justify-center">
+        <div className="h-40 w-40 rounded-full border-8 border-t-[#4D179A] animate-spin p-4" />
+      </div>
+    );
 
   return (
     <>
       <main
         style={{ background: theme === "dark" ? "#000000" : "#FFF085" }}
-        className={`flex w-full h-full flex-col items-center justify-center py-4 `}
+        className={`flex w-full h-full flex-col bg-[#EB9C41] items-center justify-center py-4 `}
       >
         <div
           onClick={() => setOpen(true)}

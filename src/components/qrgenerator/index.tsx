@@ -9,7 +9,6 @@ import { IconLink, IconPhoto } from "@tabler/icons-react";
 import { QRCodeSVG } from "qrcode.react";
 import {
   Download,
-  Globe,
   Palette,
   Settings2,
   Link as LinkIcon,
@@ -61,7 +60,6 @@ export default function QrGenerator() {
   const background = useThemeStore((s) => s.background);
   const text = useThemeStore((s) => s.text);
 
-  // Lógica de generación del valor del QR
   useEffect(() => {
     if (mode === "url") {
       setQrValue(url);
