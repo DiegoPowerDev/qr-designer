@@ -3,8 +3,8 @@ import { Analytics } from "@vercel/analytics/next";
 
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import content from "@/content/content.json";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { useThemeStore } from "@/store/themeStore";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,8 +17,15 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Fast QR Generator",
-  description: "Pagina Web para creación de QR's sin limites de forma gratuita",
+  title: content.metadata.title,
+  applicationName: content.metadata.applicationName,
+  description: content.metadata.description,
+  authors: content.metadata.authors,
+  metadataBase: new URL("https://fastqrgenerator.vercel.app"),
+  openGraph: content.metadata.openGraph,
+  verification: {
+    google: "abSLIjYehY7UNNtTck9OZ0lKx9FvXoWr4XvLnOBVs1M",
+  },
 };
 
 export default function RootLayout({
@@ -28,16 +35,34 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <meta
-          name="google-site-verification"
-          content="abSLIjYehY7UNNtTck9OZ0lKx9FvXoWr4XvLnOBVs1M"
-        />
-      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased md:h-screen max-w-screen flex`}
       >
         <TooltipProvider>{children}</TooltipProvider>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              name: "Fast QR Generator",
+              operatingSystem: "All",
+              applicationCategory: "DesignApplication",
+              description:
+                "Generador de códigos QR gratuito y personalizable para enlaces, redes sociales y redes WiFi.",
+              offers: {
+                "@type": "Offer",
+                price: "0",
+                priceCurrency: "USD",
+              },
+              author: {
+                "@type": "Person",
+                name: "Diego Torres",
+                url: "https://diegotorres-portfoliodev.vercel.app",
+              },
+            }),
+          }}
+        />
       </body>
       <Analytics />
     </html>
