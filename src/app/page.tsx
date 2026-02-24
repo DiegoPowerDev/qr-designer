@@ -26,10 +26,7 @@ export default function Home() {
         style={{ background: theme === "dark" ? "#000000" : "#FFF085" }}
         className={`flex w-full h-full flex-col items-center justify-center py-4 `}
       >
-        <div
-          onClick={() => setOpen(true)}
-          className="hidden md:block  absolute top-10 left-20 "
-        >
+        <div onClick={() => setOpen(true)} className="  ">
           <Info color={text} />
         </div>
         <div className="flex w-full  md:hidden p-2 px-8 rounded gap-4 justify-between ">

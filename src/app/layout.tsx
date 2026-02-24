@@ -1,19 +1,15 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 
-import { Geist, Geist_Mono } from "next/font/google";
+import { Righteous } from "next/font/google";
 import "./globals.css";
 import content from "@/content/content.json";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const righteous = Righteous({
+  weight: "400",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -36,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased md:h-screen max-w-screen flex`}
+        className={`${righteous.className}  antialiased md:h-screen max-w-screen flex`}
       >
         <TooltipProvider>{children}</TooltipProvider>
         <script

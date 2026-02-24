@@ -5,6 +5,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useState, useEffect } from "react";
+import { IconLink, IconPhoto } from "@tabler/icons-react";
 import { QRCodeSVG } from "qrcode.react";
 import {
   Download,
@@ -17,6 +18,7 @@ import {
   Eye,
   Trash2,
   Info,
+  Code,
 } from "lucide-react";
 
 // Shadcn UI
@@ -127,10 +129,10 @@ export default function QrGenerator() {
             className={`grid w-full  grid-cols-2    rounded-xl  `}
           >
             <TabsTrigger value="url" className="rounded-lg">
-              <LinkIcon className="w-4 h-4 mr-2 font-bold" /> URL
+              <LinkIcon className="w-4 h-4 mr-2  " /> URL
             </TabsTrigger>
             <TabsTrigger value="wifi" className="rounded-lg">
-              <Wifi className="w-4 h-4 mr-2 font-bold" /> Wi-Fi
+              <Wifi className="w-4 h-4 mr-2  " /> Wi-Fi
             </TabsTrigger>
           </TabsList>
 
@@ -138,7 +140,7 @@ export default function QrGenerator() {
             style={{ background: background, color: text }}
             className={`border-none shadow-xl text-white backdrop-blur-sm h-full flex flex-col gap-2 px-6 py-4 rounded-xl`}
           >
-            <div className="flex items-center gap-2 text-2xl font-bold py-2">
+            <div className="flex items-center gap-2 text-2xl   py-2">
               <Settings2 className="w-6 h-6  " />
               Configuración
             </div>
@@ -148,11 +150,8 @@ export default function QrGenerator() {
                 className="flex flex-col justify-start border p-4 rounded-xl"
               >
                 <div className="flex flex-col gap-2 ">
-                  <Label
-                    htmlFor="url"
-                    className="font-bold flex items-center gap-2"
-                  >
-                    <Globe className="w-4 h-4" /> URL :
+                  <Label htmlFor="url" className="  flex items-center gap-2">
+                    <IconLink className="w-4 h-4" /> URL :
                   </Label>
                   <Input
                     id="url"
@@ -170,10 +169,7 @@ export default function QrGenerator() {
               >
                 <div className="flex flex-col gap-4">
                   <div className=" flex flex-col gap-2">
-                    <Label
-                      htmlFor="ssid"
-                      className="font-bold flex items-center gap-2"
-                    >
+                    <Label htmlFor="ssid" className=" flex items-center gap-2">
                       Nombre de la Red (SSID)
                     </Label>
                     <Input
@@ -186,7 +182,7 @@ export default function QrGenerator() {
                   </div>
                   <div className="flex flex-col md:flex-row w-full gap-2">
                     <div className="flex flex-col gap-2">
-                      <Label className="font-bold">Seguridad</Label>
+                      <Label className="">Seguridad</Label>
                       <Select
                         value={wifiEncryption}
                         onValueChange={setWifiEncryption}
@@ -203,7 +199,7 @@ export default function QrGenerator() {
                     </div>
                     {wifiEncryption !== "none" && (
                       <div className="flex flex-col gap-2">
-                        <Label className="font-bold">Contraseña</Label>
+                        <Label className="">Contraseña</Label>
                         <div className="relative">
                           <Input
                             type={showPass ? "text" : "password"}
@@ -232,10 +228,7 @@ export default function QrGenerator() {
               <div className="pt-2">
                 <div className="flex w-full p-4 border rounded-xl justify-center gap-4  ">
                   <div className="flex flex-col items-center">
-                    <Label
-                      htmlFor="color1"
-                      className="text-xs uppercase font-bold  "
-                    >
+                    <Label htmlFor="color1" className="text-xs uppercase   ">
                       Color QR
                     </Label>
 
@@ -248,10 +241,7 @@ export default function QrGenerator() {
                     />
                   </div>
                   <div className="flex flex-col items-center">
-                    <Label
-                      htmlFor="color2"
-                      className="text-xs uppercase font-bold "
-                    >
+                    <Label htmlFor="color2" className="text-xs uppercase  ">
                       Fondo
                     </Label>
 
@@ -265,9 +255,7 @@ export default function QrGenerator() {
                   </div>
                   <div className="flex flex-col items-center gap-2 ">
                     <div className="flex gap-2">
-                      <Label className="text-xs uppercase font-bold ">
-                        Redundancia
-                      </Label>
+                      <Label className="text-xs uppercase  ">Redundancia</Label>
 
                       <Tooltip delayDuration={300}>
                         <TooltipTrigger asChild>
@@ -275,7 +263,10 @@ export default function QrGenerator() {
                         </TooltipTrigger>
                         <TooltipContent className="max-w-[280px] p-4">
                           <div className="space-y-2">
-                            <p className="font-bold text-sm">
+                            <p
+                              className=" text-sm"
+                              style={{ color: background }}
+                            >
                               Capacidad de Recuperación
                             </p>
                             <p className="text-xs leading-relaxed">
@@ -284,12 +275,17 @@ export default function QrGenerator() {
                             </p>
                             <ul className="text-xs list-disc pl-4 space-y-1">
                               <li>
-                                <strong>Nivel H (Máximo):</strong> Recomendado
-                                si usas logos grandes.
+                                <span style={{ color: background }}>
+                                  Nivel H (Máximo):
+                                </span>
+                                Recomendado si usas logos grandes.
                               </li>
                               <li>
-                                <strong>Nivel L (Bajo):</strong> Crea un QR más
-                                simple y limpio, pero muy sensible a daños.
+                                <span style={{ color: background }}>
+                                  Nivel L (Bajo):
+                                </span>
+                                Crea un QR más simple y limpio, pero muy
+                                sensible a daños.
                               </li>
                             </ul>
                           </div>
@@ -317,7 +313,7 @@ export default function QrGenerator() {
                 </div>
 
                 <div className="flex flex-col gap-2 pt-2">
-                  <Label className="text-sm font-bold flex items-center gap-2">
+                  <Label className="text-sm  flex items-center gap-2">
                     <Palette className="w-4 h-4" /> Personalización de Logo
                   </Label>
                   {!logo ? (
@@ -340,7 +336,7 @@ export default function QrGenerator() {
                         </Button>
                       </div>
                       <div className="flex-1 space-y-4">
-                        <div className="flex justify-between text-xs font-bold">
+                        <div className="flex justify-between text-xs ">
                           <span>Tamaño del Logo</span>
                           <span>{logoSize}px</span>
                         </div>
@@ -367,7 +363,7 @@ export default function QrGenerator() {
         className={`gap-2 shadow-2xl   text-white flex flex-col py-4 h-full rounded-xl `}
       >
         <div className="w-full h-full flex flex-col items-center gap-4 ">
-          <div className="text-xl font-bold text-center">Vista Previa</div>
+          <div className="text-xl  text-center">Vista Previa</div>
           <div className="w-full flex flex-col h-full items-center justify-center gap-8">
             <QRCodeSVG
               id="qr-svg"
@@ -393,10 +389,10 @@ export default function QrGenerator() {
               <div className="w-3/4 flex flex-col gap-2">
                 <Button
                   size="lg"
-                  className="w-full h-14 text-lg font-bold rounded-2xl bg-green-700 hover:bg-green-800"
+                  className="w-full h-14 text-lg  rounded-2xl bg-green-700 hover:bg-green-800"
                   onClick={() => downloadQR("png")}
                 >
-                  <Download className="mr-2 w-5 h-5 font-bold" /> Descargar PNG
+                  <Download className="mr-2 w-5 h-5 " /> Descargar PNG
                 </Button>
                 <div className="grid grid-cols-2 gap-2">
                   <Button
@@ -404,14 +400,14 @@ export default function QrGenerator() {
                     className="rounded-xl h-12"
                     onClick={() => downloadQR("svg")}
                   >
-                    SVG
+                    <Code /> SVG
                   </Button>
                   <Button
                     variant="secondary"
                     className="rounded-xl h-12"
                     onClick={() => downloadQR("webp")}
                   >
-                    WebP
+                    <IconPhoto /> WebP
                   </Button>
                 </div>
               </div>

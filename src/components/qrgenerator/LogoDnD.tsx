@@ -70,7 +70,7 @@ export function LogoDnD({ onLogoChange }: LogoUploadProps) {
         </div>
 
         <div className="space-y-1">
-          <p className="text-sm font-semibold  ">
+          <p className="text-sm    ">
             {isDragActive ? "¡Suéltalo el logo aqui!" : "Arrastra tu logo aquí"}
           </p>
           <p className="text-xs ">PNG, JPG, WEBP o SVG (Máx. 2MB)</p>
