@@ -3,6 +3,9 @@
     "title": "Fast QR Generator | Crea Códigos QR Gratis y Personalizados",
     "applicationName": "Fast QR Generator",
     "description": "Genera códigos QR al instante para URLs, WiFi, WhatsApp y más. Herramienta gratuita, rápida y sin registros, diseñada por Diego Torres.",
+    "alternates": {
+      "canonical": "https://fastqrgenerator.vercel.app"
+    },
     "authors": [
       {
         "name": "Diego Torres",
