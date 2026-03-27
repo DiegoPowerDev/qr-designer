@@ -36,6 +36,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LogoDnD } from "./LogoDnD";
 import { useThemeStore } from "@/store/themeStore";
+import Imagen from "next/image";
 
 export default function QrGenerator() {
   const [mode, setMode] = useState("url");
@@ -114,9 +115,72 @@ export default function QrGenerator() {
 
   return (
     <div className=" grid grid-cols-1 md:grid-cols-2 w-11/12 md:w-7/12 justify-center gap-8 h-full 2xl:h-3/4 2xl:py-6">
-      <div className="flex justify-center items-start">
-        {/* COLUMNA IZQUIERDA: CONFIGURACIÓN */}
+      {/* COLUMNA IZQUIERDA */}
+      <div className={`gap-2 text-white flex flex-col h-full  `}>
+        <div className="flex gap-2 items-center justify-center bg-black rounded-xl p-1">
+          <Imagen src="/logo.webp" alt="logo" width={40} height={40} />
+          <h1 className="text-3xl text-[#ACF76C] text-shadow-md text-shadow-[#ACF76C]">
+            FAST QR MASTER
+          </h1>
+        </div>
+        <div
+          style={{ background: background, color: text }}
+          className="w-full  shadow-2xl py-4  rounded-xl h-full flex flex-col items-center gap-4 "
+        >
+          <div className="text-xl  text-center">Vista Previa</div>
+          <div className="w-full flex flex-col h-full items-center justify-center gap-8">
+            <QRCodeSVG
+              id="qr-svg"
+              value={qrValue || " "}
+              className="w-64 h-64 2xl:w-80 2xl:h-80 object-contain  p-4"
+              marginSize={1}
+              fgColor={fgColor}
+              bgColor={bgColor}
+              level={level}
+              imageSettings={
+                logo
+                  ? {
+                      src: logo,
+                      height: logoSize,
+                      width: logoSize,
+                      excavate: true,
+                    }
+                  : undefined
+              }
+            />
 
+            <div className="  w-full flex flex-col items-center gap-2">
+              <div className="w-3/4 flex flex-col gap-2">
+                <Button
+                  size="lg"
+                  className="w-full h-14 text-lg  rounded-2xl bg-green-500 hover:bg-green-700 "
+                  onClick={() => downloadQR("png")}
+                >
+                  <Download className="mr-2 w-5 h-5 " /> Descargar PNG
+                </Button>
+                <div className="grid grid-cols-2 gap-2">
+                  <Button
+                    variant="secondary"
+                    className="rounded-xl h-12"
+                    onClick={() => downloadQR("svg")}
+                  >
+                    <Code /> SVG
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    className="rounded-xl h-12"
+                    onClick={() => downloadQR("webp")}
+                  >
+                    <IconPhoto /> WebP
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* COLUMNA DERECHA */}
+      <div className="flex justify-center items-start">
         <Tabs
           defaultValue="url"
           onValueChange={setMode}
@@ -352,66 +416,6 @@ export default function QrGenerator() {
             </div>
           </div>
         </Tabs>
-      </div>
-
-      {/* COLUMNA DERECHA: PREVIEW FIJO */}
-
-      <div
-        style={{ background: background, color: text }}
-        className={`gap-2 shadow-2xl   text-white flex flex-col py-4 h-full rounded-xl `}
-      >
-        <div className="w-full h-full flex flex-col items-center gap-4 ">
-          <div className="text-xl  text-center">Vista Previa</div>
-          <div className="w-full flex flex-col h-full items-center justify-center gap-8">
-            <QRCodeSVG
-              id="qr-svg"
-              value={qrValue || " "}
-              className="w-64 h-64 2xl:w-80 2xl:h-80 object-contain  p-4"
-              marginSize={1}
-              fgColor={fgColor}
-              bgColor={bgColor}
-              level={level}
-              imageSettings={
-                logo
-                  ? {
-                      src: logo,
-                      height: logoSize,
-                      width: logoSize,
-                      excavate: true,
-                    }
-                  : undefined
-              }
-            />
-
-            <div className="  w-full flex flex-col items-center gap-2">
-              <div className="w-3/4 flex flex-col gap-2">
-                <Button
-                  size="lg"
-                  className="w-full h-14 text-lg  rounded-2xl bg-green-700 hover:bg-green-800"
-                  onClick={() => downloadQR("png")}
-                >
-                  <Download className="mr-2 w-5 h-5 " /> Descargar PNG
-                </Button>
-                <div className="grid grid-cols-2 gap-2">
-                  <Button
-                    variant="secondary"
-                    className="rounded-xl h-12"
-                    onClick={() => downloadQR("svg")}
-                  >
-                    <Code /> SVG
-                  </Button>
-                  <Button
-                    variant="secondary"
-                    className="rounded-xl h-12"
-                    onClick={() => downloadQR("webp")}
-                  >
-                    <IconPhoto /> WebP
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

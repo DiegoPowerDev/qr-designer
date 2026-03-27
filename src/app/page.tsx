@@ -4,12 +4,10 @@ import { useThemeStore } from "@/store/themeStore";
 import { Info, Moon, Sun } from "lucide-react";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { useEffect, useState } from "react";
 
@@ -18,6 +16,7 @@ export default function Home() {
   const toggleTheme = useThemeStore((s) => s.toggleTheme);
   const background = useThemeStore((s) => s.background);
   const text = useThemeStore((s) => s.text);
+  const title = useThemeStore((s) => s.title);
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -42,18 +41,18 @@ export default function Home() {
           onClick={() => setOpen(true)}
           className="hidden md:block  absolute top-10 left-20 "
         >
-          <Info color={text} />
+          <Info color={title} />
         </div>
         <div className="flex w-full  md:hidden p-2 px-8 rounded gap-4 justify-between ">
           <div onClick={() => setOpen(true)}>
-            <Info color={text} />
+            <Info color={title} />
           </div>
 
           <div
             onClick={() => toggleTheme()}
             className=" active:scale-125 transition-all"
           >
-            {theme === "dark" ? <Sun color={text} /> : <Moon color={text} />}
+            {theme === "dark" ? <Sun color={title} /> : <Moon color={title} />}
           </div>
         </div>
         <QrGenerator />
@@ -61,7 +60,7 @@ export default function Home() {
           onClick={() => toggleTheme()}
           className="hidden md:block absolute top-10 right-20 active:scale-125 transition-all"
         >
-          {theme === "dark" ? <Sun color={text} /> : <Moon color={text} />}
+          {theme === "dark" ? <Sun color={title} /> : <Moon color={title} />}
         </div>
         <a
           style={{ color: text }}

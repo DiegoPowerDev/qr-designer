@@ -1,10 +1,10 @@
 {
   "metadata": {
-    "title": "Fast QR Generator | Crea Códigos QR Gratis y Personalizados",
-    "applicationName": "Fast QR Generator",
+    "title": "Fast QR Master | Crea Códigos QR Gratis y Personalizados",
+    "applicationName": "Fast QR Master",
     "description": "Genera códigos QR al instante para URLs, WiFi, WhatsApp y más. Herramienta gratuita, rápida y sin registros, diseñada por Diego Torres.",
     "alternates": {
-      "canonical": "https://fastqrgenerator.vercel.app"
+      "canonical": "https://fastqrmaster.vercel.app"
     },
     "authors": [
       {
@@ -17,20 +17,20 @@
       "crear qr online gratis",
       "qr para whatsapp",
       "generar qr wifi",
-      "fast qr generator",
+      "fast qr master",
       "qr customizer"
     ],
     "openGraph": {
-      "title": "Fast QR Generator | Crea tus Códigos QR en Segundos",
+      "title": "Fast QR Master | Crea tus Códigos QR en Segundos",
       "description": "Herramienta profesional para generar códigos QR personalizados de alta resolución.",
-      "url": "https://fastqrgenerator.vercel.app",
-      "siteName": "Fast QR Generator",
+      "url": "https://fastqrmaster.vercel.app",
+      "siteName": "Fast QR Master",
       "images": [
         {
           "url": "/logo.webp",
           "width": 1200,
           "height": 630,
-          "alt": "Fast QR Generator - Herramienta de creación de códigos QR"
+          "alt": "Fast QR Master - Herramienta de creación de códigos QR"
         }
       ],
       "locale": "es_MX",
@@ -38,7 +38,7 @@
     },
     "twitter": {
       "card": "summary_large_image",
-      "title": "Fast QR Generator | Generador de QR Rápido",
+      "title": "Fast QR Master | Generador de QR Rápido",
       "description": "Crea y descarga tus códigos QR de forma gratuita y sin complicaciones.",
       "images": ["/logo.webp"]
     }

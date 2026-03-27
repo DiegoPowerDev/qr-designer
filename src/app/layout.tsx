@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   applicationName: content.metadata.applicationName,
   description: content.metadata.description,
   authors: content.metadata.authors,
-  metadataBase: new URL("https://fastqrgenerator.vercel.app"),
+  metadataBase: new URL("https://fastqrmaster.vercel.app"),
   openGraph: content.metadata.openGraph,
   verification: {
     google: "abSLIjYehY7UNNtTck9OZ0lKx9FvXoWr4XvLnOBVs1M",
@@ -41,7 +41,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebApplication",
-              name: "Fast QR Generator",
+              name: "Fast QR Master",
               operatingSystem: "All",
               applicationCategory: "DesignApplication",
               description:
